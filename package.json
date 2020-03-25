@@ -1,0 +1,15 @@
+{
+  "name": "videogame-tracker",
+  "version": "1.0.0",
+  "description": "A web app designed to keep track of all the video games in someones collection and rank them online",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Armaan Lala",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}
