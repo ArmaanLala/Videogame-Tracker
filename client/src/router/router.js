@@ -36,7 +36,7 @@ let router = new Router({
             }
         },
         {
-            path: "/:user_id",
+            path: "/users/:user_id",
             name: "view-profile",
             component: ViewProfile,
             meta: {
