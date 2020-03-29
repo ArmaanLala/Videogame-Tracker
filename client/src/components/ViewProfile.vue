@@ -1,15 +1,32 @@
 <template>
     <div>
+        <router-link to='/add'>
+        <v-btn icon
+        fab
+        absolute
+        fixed
+        right
+        color='pink'
+        >
+        <v-icon>fa-plus</v-icon></v-btn>
+        </router-link>
         <h1>{{name}}</h1>
+
+        <Game v-for="game in games" v-bind:key="game.score" v-bind:name="game.name" v-bind:score="game.score" v-bind:imgSrc="game.img"/>
         <h3 v-if="editAllowed">Edit allowed</h3>
+
     </div>
 </template>
 
 <script>
 import firebase from 'firebase'
+import Game from './Game'
 import db from './firebaseInit'
 export default {
     name:'view-profile',
+    components:{
+        Game
+    },
     data() {
         return {
         editAllowed: false,
@@ -35,6 +52,8 @@ export default {
                     // console.log(doc.data().name)
                     vm.name = doc.data().name
                     vm.games = doc.data().games
+                    vm.games.sort((a, b) => (a.score < b.score) ? 1 : -1)
+                    console.log(doc.data().games)
                     if (doc.data().email == firebase.auth().currentUser.email){
                         vm.editAllowed = true
                     }
