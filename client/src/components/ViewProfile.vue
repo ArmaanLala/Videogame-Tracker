@@ -7,12 +7,13 @@
         fixed
         right
         color='pink'
+        v-if="editAllowed"
         >
         <v-icon>fa-plus</v-icon></v-btn>
         </router-link>
         <h1>{{name}}</h1>
 
-        <Game v-for="game in games" v-bind:key="game.score" v-bind:name="game.name" v-bind:score="game.score" v-bind:imgSrc="game.img"/>
+        <Game v-for="game in games" v-bind:key="game.score" v-bind:name="game.name" v-bind:score="game.score" v-bind:imgSrc="game.img" v-bind:completion="game.completion"/>
         <h3 v-if="editAllowed">Edit allowed</h3>
 
     </div>
@@ -31,7 +32,7 @@ export default {
         return {
         editAllowed: false,
         name: '',
-        games: []
+        games: [],
     }
     },
     beforeRouteEnter (to, from, next) {
@@ -53,7 +54,7 @@ export default {
                     vm.name = doc.data().name
                     vm.games = doc.data().games
                     vm.games.sort((a, b) => (a.score < b.score) ? 1 : -1)
-                    console.log(doc.data().games)
+                    // console.log(doc.data().games[0].completion)
                     if (doc.data().email == firebase.auth().currentUser.email){
                         vm.editAllowed = true
                     }

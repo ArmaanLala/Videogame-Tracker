@@ -1,6 +1,6 @@
 <template>
     <div class="num123">
-        <v-card max-width='900px' height ='200px' >
+        <v-card max-width='900px' height ='200px' :class="{o: completion==3,f: completion==2,'h': completion==1,'n': completion==0}">
          <v-container fill-height>
         <v-layout row wrap align-center>
           <v-flex class="text-xs-center">
@@ -21,11 +21,17 @@
 
 <script>
 export default {
+    data() {
+        return{
+        completionS:['Never Played',"Haven't Beaten",'Finished','Completed 100%']
+    }
+    },
     props:{
         name: String,
         imgSrc:String,
         score: Number,
-        completion: String,
+        completion: Number,
+        
     },
     created() {
     }
@@ -33,6 +39,9 @@ export default {
 </script>
 
 <style scoped>
+h1{
+    color: white;
+}
 div{
     margin: 0 auto;
     /* display: inline; */
@@ -50,11 +59,10 @@ div{
     margin-bottom: 0px;
 }
 .green {
-	color: green;
+	color: rgb(0, 255, 0);
 }
 .red {
-	color: red;
-    background-color: transparent;
+	color: rgb(221, 0, 0);
 }
 .yellow{
     color: yellow;
@@ -73,5 +81,17 @@ div{
 }
 .num123{
     margin-bottom: 1rem;
+}
+.o{
+background-color: rgb(7, 124, 3) !important;
+}
+.f{
+    background-color:   #1976D2!important;
+}
+.h {
+    background-color: rgb(223, 172, 224) !important;
+}
+.n {
+    background-color: rgb(155, 154, 154) !important;
 }
 </style>
