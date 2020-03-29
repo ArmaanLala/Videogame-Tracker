@@ -3,10 +3,10 @@
         <v-card max-width='900px' height ='200px' :class="{o: completion==3,f: completion==2,'h': completion==1,'n': completion==0}">
          <v-container fill-height>
         <v-layout row wrap align-center>
-          <v-flex class="text-xs-center">
+          <v-flex class="text-xs-center i" >
             <img v-bind:src=imgSrc height='150px' class="in">
           </v-flex>
-          <v-flex class="text-xs-center">
+          <v-flex class="text-xs-center" width='500px'>
             <h1>{{name}}</h1>
           </v-flex>
           <v-flex class="text-xs-center">
@@ -39,7 +39,12 @@ export default {
 </script>
 
 <style scoped>
+.i{
+    max-width: 200px !important;
+}
 h1{
+    display: flex;
+    justify-content: left;
     color: white;
 }
 div{
@@ -59,12 +64,21 @@ div{
     margin-bottom: 0px;
 }
 .green {
-	color: rgb(0, 255, 0);
+    display: flex;
+    padding-right: 2rem;
+    justify-content: right;
+    color: rgb(0, 255, 0);
 }
 .red {
+    display: flex;
+    padding-right: 2rem;
+    justify-content: right;
 	color: rgb(221, 0, 0);
 }
 .yellow{
+    display: flex;
+    padding-right: 2rem;
+    justify-content: right;
     color: yellow;
 }
 .v-application .red {

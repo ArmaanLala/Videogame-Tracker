@@ -37,6 +37,7 @@
     <v-content>
       <router-view></router-view>
     </v-content>
+    <v-footer color='primary' fixed>Test</v-footer>
   </v-app>
 </template>
 
