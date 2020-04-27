@@ -94,3 +94,9 @@ import firebase from 'firebase'
   }
   }
 </script>
+
+<style>
+.row{
+  margin: 0;
+}
+</style>

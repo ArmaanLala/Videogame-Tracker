@@ -1,49 +1,96 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <!-- <router-link to="/"> -->
-      <!-- <div class="d-flex align-center"> -->
-      <router-link class="router-link" to="/">
-      <v-btn text x-large>
-      Video Game Tracker
-      </v-btn>
+    <v-app-bar app dark color="primary">
+      <router-link to="/">
+        <v-toolbar-title>
+          <v-btn text x-large>Video Game Tracker</v-btn>
+        </v-toolbar-title>
       </router-link>
-      <!-- </div> -->
-      <!-- </router-link> -->
-
       <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <!-- <v-btn
+          v-for="item in menu"
+          :key="item.icon"
+          :to="item.link"
+          text
+        >{{ item.title }}</v-btn>-->
 
-      <router-link v-bind:to="{name: 'view-profile', params : { user_id: id} }" v-if="isLoggedIn">
-        <v-btn v-on:click="getId" text>
-          <span class="mr-2">Profile</span>
+        <v-btn v-on:click="getId" text v-if="isLoggedIn">
+          <router-link v-bind:to="{name: 'view-profile', params : { user_id: id} }">
+            <span class="mr-2">Profile</span>
+          </router-link>
         </v-btn>
-      </router-link>
 
-      <router-link to="/login" v-if="!isLoggedIn">
-        <v-btn text>
-          <span class="mr-2">Login</span>
+        <v-btn text v-if="!isLoggedIn">
+          <router-link to="/login">
+            <span class="mr-2">Login</span>
+          </router-link>
         </v-btn>
-      </router-link>
 
-      <router-link to="/register" v-if="!isLoggedIn">
-        <v-btn text>
-          <span class="mr-2">Register</span>
+        <v-btn text v-if="!isLoggedIn">
+          <router-link to="/register">
+            <span class="mr-2">Register</span>
+          </router-link>
         </v-btn>
-      </router-link>
 
-      <v-btn v-on:click="logout" v-if="isLoggedIn">Log Out</v-btn>
+        <v-btn v-on:click="logout" v-if="isLoggedIn">Log Out</v-btn>
+      </v-toolbar-items>
+
+      <v-menu class="hidden-md-and-up" auto>
+        <template v-slot:activator="{ on }">
+          <v-app-bar-nav-icon v-on="on" class="hidden-md-and-up"></v-app-bar-nav-icon>
+        </template>
+
+        <v-list>
+          <v-list-item v-if="!isLoggedIn">
+            <v-list-item-content>
+              <router-link to="/login">
+                <v-btn text>
+                  <span class="mr-2">Login</span>
+                </v-btn>
+              </router-link>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item v-if="!isLoggedIn">
+            <v-list-item-content>
+              <router-link to="/register">
+                <v-btn text>
+                  <span class="mr-2">Register</span>
+                </v-btn>
+              </router-link>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item v-if="isLoggedIn">
+            <v-list-item-content>
+              <router-link v-bind:to="{name: 'view-profile', params : { user_id: id} }">
+                <v-btn v-on:click="getId" text>
+                  <span class="mr-2">Profile</span>
+                </v-btn>
+              </router-link>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item v-if="isLoggedIn">
+            <v-list-item-content>
+              <v-btn v-on:click="logout">Log Out</v-btn>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color='primary' fixed>Test</v-footer>
+    <v-footer color="primary" fixed dark>Test</v-footer>
   </v-app>
 </template>
 
 <script>
 import firebase from "firebase";
-import db from './components/firebaseInit'
+import db from "./components/firebaseInit";
 export default {
   name: "App",
 
@@ -52,7 +99,12 @@ export default {
   data() {
     return {
       isLoggedIn: false,
-      id: ''
+      id: "",
+      menu: [
+        { icon: "home", title: "Link A" },
+        { icon: "info", title: "Link B" },
+        { icon: "warning", title: "Link C" }
+      ]
     };
     //
   },
@@ -72,20 +124,28 @@ export default {
         });
     },
     getId() {
-      db.collection('users').where('email', '==', firebase.auth().currentUser.email).get().then(query => {
-        query.forEach( doc => {
-          this.id = doc.id;
-        }
-        )
-      })
+      db.collection("users")
+        .where("email", "==", firebase.auth().currentUser.email)
+        .get()
+        .then(query => {
+          query.forEach(doc => {
+            this.id = doc.id;
+          });
+        });
+    },
+    menuItems() {
+      return this.menu;
     }
-  
   }
 };
 </script>
 
 <style>
 .v-btn.v-size--x-large {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
+}
+.v-application a {
+  color: white !important;
+  text-decoration: none !important;
 }
 </style>
