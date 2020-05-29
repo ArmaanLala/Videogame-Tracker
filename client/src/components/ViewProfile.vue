@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link to="/add">
-      <v-btn fab fixed bottom right color="pink" v-if="editAllowed">
+      <v-btn fab fixed bottom right color="#F15025" v-if="editAllowed">
         <v-icon color="white">fa-plus</v-icon></v-btn
       >
     </router-link>
@@ -14,7 +14,7 @@
       max-width="10%"
     >
     </v-select>
-
+<div class="flexgr">
     <Game
       v-for="game in filteredGames"
       v-bind:key="game.score"
@@ -22,7 +22,9 @@
       v-bind:score="game.score"
       v-bind:imgSrc="game.img"
       v-bind:completion="game.completion"
+      class="game"
     />
+    </div>
     <h3 v-if="editAllowed">Edit allowed</h3>
   </div>
 </template>
@@ -116,18 +118,32 @@ export default {
 </script>
 
 <style scoped>
-.v-btn--fab.v-size--default.v-btn--absolute.v-btn--bottom {
-  bottom: 90px;
+/* .v-btn--fab.v-size--default.v-btn--absolute.v-btn--bottom {
+  bottom: 2px;
+} */
+.game{
+  margin: 1rem;
+  background-color: display-4;
 }
-div {
+.flexgr {
+  
   margin: 0 auto;
-  padding: 0.5rem;
+  flex-wrap: wrap;
+  
+  display: flex;
+  justify-content: center;
 }
 .v-input {
   max-width: 15%;
+  margin: 0 auto;
+  color: white;
 }
 h1 {
+  color: white;
   width: fit-content;
   margin: 0 auto;
+}
+template{
+color: #778DA9;
 }
 </style>

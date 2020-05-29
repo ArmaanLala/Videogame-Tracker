@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app dark color="primary">
+    <v-app-bar app dark color="#0D1821">
       <router-link to="/">
         <v-toolbar-title>
           <v-btn text x-large>Video Game Tracker</v-btn>
@@ -84,7 +84,7 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="primary" fixed dark>Test</v-footer>
+    <v-footer color="#0D1821" fixed dark>Licensed under the MIT Open License by Armaan Lala</v-footer>
   </v-app>
 </template>
 
@@ -93,6 +93,7 @@ import firebase from "firebase";
 import db from "./components/firebaseInit";
 export default {
   name: "App",
+  
 
   components: {},
 
@@ -109,6 +110,7 @@ export default {
     //
   },
   created() {
+
     if (firebase.auth().currentUser) {
       this.isLoggedIn = true;
       this.getId();
@@ -141,11 +143,15 @@ export default {
 </script>
 
 <style>
+
 .v-btn.v-size--x-large {
   font-size: 1.5rem;
 }
 .v-application a {
   color: white !important;
   text-decoration: none !important;
+}
+.v-content{
+  background-color: #27333F;
 }
 </style>

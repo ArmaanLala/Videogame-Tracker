@@ -1,8 +1,8 @@
 <template>
-    <div class="num123">
-        <v-card max-width='900px' height ='200px' :class="{o: completion==3,f: completion==2,'h': completion==1,'n': completion==0}">
+    <div>
+        <v-card width='300px' height ='400px' elevation="24" :class="{o: completion==3,f: completion==2,'h': completion==1,'n': completion==0}">
          <v-container fill-height>
-        <v-layout row wrap align-center>
+        <v-layout column align-center>
           <v-flex class="text-xs-center i" >
             <img v-bind:src=imgSrc height='150px' class="in">
           </v-flex>
@@ -39,73 +39,73 @@ export default {
 </script>
 
 <style scoped>
+
 .i{
     max-width: 200px !important;
 }
 h1{
-    display: flex;
-    justify-content: left;
+    /* display: flex; */
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
     color: white;
 }
-div{
-    margin: 0 auto;
-    /* display: inline; */
-    
-}
+
 .test {
     /* margin: 0 auto; */
     vertical-align: middle;
     
 }
 .in {
-    display: inline-block;
+    /* display: inline-block; */
 }
-.v-application p {
-    margin-bottom: 0px;
-}
+
 .green {
-    display: flex;
-    padding-right: 2rem;
-    justify-content: right;
+    /* display: flex; */
+    /* padding-right: 2rem; */
+    /* justify-content: right; */
     color: rgb(0, 255, 0);
 }
 .red {
-    display: flex;
-    padding-right: 2rem;
+    /* display: flex; */
+    /* padding-right: 2rem; */
     justify-content: right;
 	color: rgb(221, 0, 0);
 }
 .yellow{
-    display: flex;
-    padding-right: 2rem;
+    /* display: fle */
+    /* padding-right: 2rem; */
     justify-content: right;
     color: yellow;
 }
 .v-application .red {
     background-color: transparent !important;
-    border-color:transparent !important;
+    /* border-color:transparent !important; */
 }
 .v-application .green {
     background-color: transparent !important;
-    border-color:transparent !important;
+    /* border-color:transparent !important; */
 }
 .v-application .yellow {
     background-color: transparent !important;
-    border-color:transparent !important;
+    /* border-color:transparent !important; */
 }
-.num123{
-    margin-bottom: 1rem;
-}
+
 .o{
-background-color: rgb(7, 124, 3) !important;
+background-color: #077C03 !important;
+border-color: #077C03 !important;
 }
 .f{
-    background-color:   #1976D2!important;
+    background-color:   #086788!important;
 }
 .h {
-    background-color: rgb(223, 172, 224) !important;
+    background-color: #D62839 !important;
 }
 .n {
-    background-color: rgb(155, 154, 154) !important;
+    background-color: #ffffff !important;
+}
+div{
+    padding: .6rem;
+    background-color:#404E5C;
 }
 </style>
