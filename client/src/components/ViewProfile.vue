@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="outers">
     <router-link to="/add">
       <v-btn fab fixed bottom right color="#F15025" v-if="editAllowed">
         <v-icon color="white">fa-plus</v-icon></v-btn
       >
     </router-link>
-    <h1>{{ name }}'s Profile</h1>
+    <h1 class="display-2 font-weight-thin mb-4">{{ name }}'s Profile</h1>
     <v-select
       :items="completion"
       label="Filter by Completion"
@@ -26,6 +26,55 @@
     />
     </div>
     <h3 v-if="editAllowed">Edit allowed</h3>
+    <v-speed-dial
+      v-model="fab"
+      
+      fixed
+      absolute
+      bottom
+      right
+    >
+      <template v-slot:activator>
+        <v-btn
+          v-model="fab"
+          color="#F15025"
+          dark
+          fab
+        >
+          <v-icon v-if="fab">mdi-dots-horizontal</v-icon>
+          <v-icon v-else>mdi-dots-horizontal</v-icon>
+        </v-btn>
+      </template>
+      <router-link to="/add">
+      <v-btn
+        fab
+        dark
+        
+        color="green"
+      >
+        <!-- <v-icon>mdi-plus</v-icon> -->
+        Add
+      </v-btn>
+      </router-link>
+      <v-btn
+        fab
+        dark
+        
+        color="indigo"
+        v-on:click="cop"
+      >
+      Share
+        <!-- <v-icon>mdi-share</v-icon> -->
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        
+        color="red"
+      >
+        <v-icon>mdi-delete</v-icon>
+      </v-btn>
+    </v-speed-dial>
   </div>
 </template>
 
@@ -42,6 +91,7 @@ export default {
     return {
       editAllowed: false,
       name: "",
+      user:'',
       filter: "All",
       games: [],
       completion: [
@@ -61,6 +111,7 @@ export default {
       .get()
       .then(doc => {
         console.log(doc.data().name);
+        // this.user = to.params.user_id
       });
     // db.collection('users').doc(to.params.user_id).get().then( q => {
     //     q.forEach( doc => {
@@ -76,6 +127,7 @@ export default {
         next(vm => {
           // console.log(doc.data().name)
           vm.name = doc.data().name;
+          vm.user = to.params.user_id
           vm.games = doc.data().games;
           vm.games.sort((a, b) => (a.score < b.score ? 1 : -1));
           // console.log(doc.data().games[0].completion)
@@ -100,6 +152,16 @@ export default {
             this.editAllowed = true;
           }
         });
+        this.user= this.$route.params.user_id
+    },
+    cop() {
+      var result = "https://videogame-tracker.herokuapp.com/users/"+this.user
+      //  this.user.select();
+      // copyText.select();
+      console.log(result)
+      console.log('test')
+      navigator.clipboard.writeText(result)
+      document.execCommand("copy");
     }
   },
   computed: {
@@ -118,6 +180,9 @@ export default {
 </script>
 
 <style scoped>
+.outers{
+  padding-top: 2rem;
+  }
 /* .v-btn--fab.v-size--default.v-btn--absolute.v-btn--bottom {
   bottom: 2px;
 } */

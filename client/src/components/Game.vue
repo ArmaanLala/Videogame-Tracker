@@ -7,7 +7,7 @@
             <img v-bind:src=imgSrc height='150px' class="in">
           </v-flex>
           <v-flex class="text-xs-center" width='500px'>
-            <h1>{{name}}</h1>
+            <h2>{{name}}</h2>
           </v-flex>
           <v-flex class="text-xs-center">
             <h1 :class="{ green: score>=70, yellow: score >=50 && score<70,red: score<50 }">{{score}}</h1>
@@ -43,7 +43,7 @@ export default {
 .i{
     max-width: 200px !important;
 }
-h1{
+h2{
     /* display: flex; */
     justify-content: center;
     text-align: center;
